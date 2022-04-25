@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+    <function>
+        <name>errors_log</name>
+        <uri>errors_log</uri>
+    </function>
+    <function>
+        <name>error_503</name>
+        <uri>error_503</uri>
+    </function>
+    <function>
+        <name>error_404</name>
+        <uri>error_404</uri>
+    </function>
+    <function>
+        <name>delete_errors_log</name>
+        <uri>delete_errors_log</uri>
+    </function>
+</functions>
