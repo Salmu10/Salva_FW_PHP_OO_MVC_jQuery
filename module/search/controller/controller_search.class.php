@@ -2,7 +2,6 @@
     class controller_search {
         function car_type() {
             echo json_encode(common::load_model('search_model', 'get_car_type'));
-            // echo json_encode(common::load_model('home_model', 'get_type'));
         }
 
         function car_brand() {
