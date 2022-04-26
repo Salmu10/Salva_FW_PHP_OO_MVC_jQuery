@@ -30,6 +30,10 @@
     margin-top: 100px;
 }
 
+label.etiquetas {
+    margin-left: 5px;
+}
+
 #icono {
     display: inline-block;
     height: 60px;

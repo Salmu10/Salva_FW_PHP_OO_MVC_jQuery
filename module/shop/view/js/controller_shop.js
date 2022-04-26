@@ -79,7 +79,7 @@ function load_filters() {
                     $('<div></div>').attr('class', 'filters_input').appendTo('.filters_content')
                     .html(
                     "<input class='check' type='checkbox' id="+ row +" name="+ data[row][row_inner][row] +" value='"+ data[row][row_inner][row] +"'/>" +
-                    "<label for="+ row +" value='"+ content_2 +"'>"+ content_2 + "</label>");                  
+                    "<label class='etiquetas' for="+ row +" value='"+ content_2 +"'>"+ content_2 + "</label>");                  
                 }
             }
             $(".filters_container").append(
