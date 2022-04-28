@@ -1,12 +1,13 @@
 function load_car_type(){
     ajaxPromise(friendlyURL('?module=search&op=car_type'), 'POST', 'JSON')
     .then(function(data) {
+        // console.log(data);
         for (row in data) {
             let content = data[row].type_name.replace(/_/g, " ");
             $('#type_select').append('<option value = "' + data[row].type_name + '">' + content + '</option>');
         }
     }).catch(function() {
-        console.log("Error load car type");
+        console.log('Error: load car type');
     });
 }
 
@@ -21,7 +22,7 @@ function load_car_brand(data = undefined){
             $('#brand_select').append('<option value = "' + data[row].brand_name + '">' + content + '</option>');
         }
     }).catch(function() {
-        console.log('Error load car brand');
+        console.log('Error: load car brand');
     }); 
 }
 

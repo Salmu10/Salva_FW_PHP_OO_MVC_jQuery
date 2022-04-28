@@ -21,10 +21,10 @@
         }
         
         public static function load_model($model, $function = null, $args = null) {
-            // die('<script>console.log('.json_encode( 'hey' ) .');</script>');
             $dir = explode('_', $model);
             $path = constant('MODEL_' . strtoupper($dir[0])) .  $model . '.class.singleton.php';
-            // $path = 'C:/xampp/htdocs/Ejercicios/Framework_PHP_OO_MVC/module/shop/model/model/shop_model.class.singleton.php';
+            // $path = 'C:/xampp/htdocs/Ejercicios/Framework_PHP_OO_MVC/module/home/model/model/home_model.class.singleton.php';
+            // die('<script>console.log('.json_encode( 'hey' ) .');</script>');
             if (file_exists($path)) {
                 require_once ($path);
                 if (method_exists($model, $function)) {

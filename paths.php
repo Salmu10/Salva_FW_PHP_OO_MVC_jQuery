@@ -56,13 +56,13 @@
     define('JS_VIEW_SHOP', SITE_PATH . 'module/shop/view/js/');
     define ('VIEW_PATH_SHOP', SITE_ROOT . 'module/shop/view/');
 
-    //MODEL_SHOP
-    define('UTILS_ERRORS', SITE_ROOT . 'module/errors/utils/');
-    define('DAO_ERRORS', SITE_ROOT . 'module/errors/model/DAO/');
-    define('BLL_ERRORS', SITE_ROOT . 'module/errors/model/BLL/');
-    define('MODEL_ERRORS', SITE_ROOT . 'module/errors/model/model/');
-    define('JS_VIEW_ERRORS', SITE_PATH . 'module/errors/view/js/');
-    define ('VIEW_PATH_ERRORS', SITE_ROOT . 'module/errors/view/');
+    //MODEL_ERRORS
+    // define('UTILS_ERRORS', SITE_ROOT . 'module/errors/utils/');
+    // define('DAO_ERRORS', SITE_ROOT . 'module/errors/model/DAO/');
+    // define('BLL_ERRORS', SITE_ROOT . 'module/errors/model/BLL/');
+    // define('MODEL_ERRORS', SITE_ROOT . 'module/errors/model/model/');
+    // define('JS_VIEW_ERRORS', SITE_PATH . 'module/errors/view/js/');
+    // define ('VIEW_PATH_ERRORS', SITE_ROOT . 'module/errors/view/');
     
     //MODEL_CONTACT
     define('MODEL_CONTACT', SITE_ROOT . 'module/contact/model/model/');

@@ -2,6 +2,7 @@
     class controller_shop {
 
         function view() {
+            // echo 'Hola';
             common::load_view('top_page_shop.html', VIEW_PATH_SHOP . 'shop.html');
         }
 
@@ -34,6 +35,7 @@
         }
 
         function cars() {
+            // echo json_encode('Hola');
             echo json_encode(common::load_model('shop_model', 'get_cars', [$_POST['category'], $_POST['type'], $_POST['id'], $_POST['loaded'], $_POST['items']]));
         }
 

@@ -58,6 +58,7 @@ function carrusel(){
 
     })
     .fail(function() {
+      console.log('Error: Carousel error');
       // window.location.href = 'index.php?module=errors&op=503&desc=Carousel error';
     }); 
 }
@@ -80,6 +81,7 @@ function category() {
       }
   })
   .catch(function() {
+    console.log('Error: Categories error');
     // window.location.href = 'index.php?module=errors&op=503&desc=Categories error';
   });    
 }
@@ -104,7 +106,8 @@ function types() {
       }
     })
     .catch(function() {
-      window.location.href = 'index.php?module=errors&op=503&desc=Types error';
+      console.log('Error: Types error');
+      // window.location.href = 'index.php?module=errors&op=503&desc=Types error';
     });
 }
 

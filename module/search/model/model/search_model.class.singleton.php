@@ -15,7 +15,6 @@
         }
 
         public function get_car_type() {
-            // return 'hola car type';
             return $this -> bll -> get_car_type_BLL();
         }
 

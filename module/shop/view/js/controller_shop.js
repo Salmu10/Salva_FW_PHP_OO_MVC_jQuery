@@ -92,7 +92,8 @@ function load_filters() {
         load_list_cars();
     })
     .catch(function() {
-        window.location.href = 'index.php?module=errors&op=503&desc=Filters error';
+        console.log('Error: Filters error');
+        // window.location.href = 'index.php?module=errors&op=503&desc=Filters error';
     });
 }
 
@@ -126,7 +127,8 @@ function visit(){
         console.log("Visits updated");
     })
     .fail(function( ) {
-        window.location.href = 'index.php?module=errors&op=503&desc=Most visit error';
+        console.log('Error: Most visit error');
+        // window.location.href = 'index.php?module=errors&op=503&desc=Most visit error';
     }); 
 }
 
@@ -218,7 +220,8 @@ function load_list_cars(total_prod = 0, items_page = 5) {
         // load_like();
     })
     .catch(function() {
-        window.location.href = 'index.php?module=errors&op=503&desc=List cars error';
+        console.log('Error: List cars error');
+        // window.location.href = 'index.php?module=errors&op=503&desc=List cars error';
     });  
 }
 
@@ -300,7 +303,8 @@ function load_details() {
         // load_like();
     })
     .catch(function() {
-        window.location.href = 'index.php?module=errors&op=503&desc=Details error';
+        console.log('Error: Details error');
+        // window.location.href = 'index.php?module=errors&op=503&desc=Details error';
     });
 }
 
@@ -357,7 +361,8 @@ function cars(car_data, loadeds = 0) {
             )
         }
     }).catch(function() {
-        window.location.href = 'index.php?module=errors&op=503&desc=Number of cars error';
+        console.log('Error: Number of cars error');
+        // window.location.href = 'index.php?module=errors&op=503&desc=Number of cars error';
     }); 
 }
 
@@ -408,7 +413,8 @@ function load_pagination(){
             $('html, body').animate({scrollTop: $(".list_content_2")});
         });
     }).catch(function() {
-        window.location.href = 'index.php?module=errors&op=503&desc=Pagination error';
+        console.log('Error: Pagination error');
+        // window.location.href = 'index.php?module=errors&op=503&desc=Pagination error';
     }); 
 }
 
@@ -437,7 +443,8 @@ function load_like(){
                 }
             }
         }).catch(function() {
-            window.location.href = 'index.php?module=errors&op=503&desc=Load like error';
+            console.log('Error: Load like error');
+            // window.location.href = 'index.php?module=errors&op=503&desc=Load like error';
         });   
     }
 }
@@ -459,7 +466,8 @@ function click_like(){
             .then(function(data) { 
                 console.log(data);
             }).catch(function() {
-                window.location.href = 'index.php?module=errors&op=503&desc=Click like error';
+                console.log('Error: Click like error');
+                // window.location.href = 'index.php?module=errors&op=503&desc=Click like error';
             });  
 
             if($(this).children("i").hasClass("bx-heart")){
