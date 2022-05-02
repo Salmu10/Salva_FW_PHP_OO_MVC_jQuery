@@ -14,20 +14,23 @@
             echo json_encode(common::load_model('login_model', 'get_login', [$_POST['username'], $_POST['password']]));
         }
 
-        function social_login() {
-            echo json_encode(common::load_model('login_model', 'get_social_login', $_POST['profile']));
-        } 
-    
         function register() {
             echo json_encode(common::load_model('login_model', 'get_register', [$_POST['username_reg'], $_POST['pass_reg'], $_POST['email_reg']]));
         }
 
-        // function verify_email() {
-        //     $verify = json_encode(common::load_model('login_model', 'get_verify_email', $_POST['token']));
-        //     if (!empty($verify)) {
-        //         return;
-        //     }
-        // }
+        function social_login() {
+            echo json_encode(common::load_model('login_model', 'get_social_login', $_POST['profile']));
+        } 
+    
+        function verify_email() {
+            // echo json_encode('Hola verify email');
+            // echo json_encode($_POST['token_email']);
+            $verify = json_encode(common::load_model('login_model', 'get_verify_email', $_POST['token_email']));
+            echo json_encode($verify);
+            // if (!empty($verify)) {
+            //     return;
+            // }
+        }
 
         // function send_recover_email() {
         //     $result = json_encode(common::load_model('login_model', 'get_recover_email', $_POST['email']));
@@ -47,13 +50,13 @@
         //     }
         // }
 
-        // function verify_token() {
-        //     $verify = json_encode(common::load_model('login_model', 'get_verify_token', $_POST['token']));
-        //     if (!empty($verify)) {
-        //         echo $verify;
-        //         return;
-        //     }
-        // }
+        function verify_token() {
+            $verify = json_encode(common::load_model('login_model', 'get_verify_token', $_POST['token']));
+            if (!empty($verify)) {
+                echo $verify;
+                return;
+            }
+        }
 
         // function new_password() {
         //     $password = json_encode(common::load_model('login_model', 'get_new_password', [$_POST['token'], $_POST['password']]));
@@ -63,13 +66,13 @@
         //     }
         // }  
     
-        // function logout() {
-        //     echo json_encode('Done');
-        // } 
+        function logout() {
+            echo json_encode('Done');
+        } 
 
-        // function data_user() {
-        //     echo json_encode(common::load_model('login_model', 'get_data_user', $_POST['token']));
-        // } 
+        function data_user() {
+            echo json_encode(common::load_model('login_model', 'get_data_user', $_POST['token']));
+        } 
     
     }
     

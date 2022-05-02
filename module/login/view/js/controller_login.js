@@ -64,19 +64,22 @@ function login(){
             data: data,
         }).done(function(result) {
             console.log(result);
-            // if(result == "error"){		
-            //     $("#error_password").html('Wrong password');
-            // }else{
-            //     localStorage.setItem("token", result);
-            //     toastr.options.timeOut = 3000;
-            //     toastr.success("Inicio de sesión realizado");
-            //     if(localStorage.getItem('likes') == null) {
-            //         setTimeout("window.location.href = " + friendlyURL("?module=home&op=view"), 1000);
-            //     } else {
-            //         console.log(localStorage.getItem('product'));
-            //         setTimeout("window.location.href = " + friendlyURL("?module=shop&op=view"), 1000);
-            //     }
-            // }	
+            if(result == "error"){		
+                $("#error_password").html('Wrong password');
+            } else if (result == "activate error"){
+                toastr.options.timeOut = 3000;
+                toastr.error("Verify the email");               
+            } else {
+                // localStorage.setItem("token", result);
+                toastr.options.timeOut = 3000;
+                toastr.success("Inicio de sesión realizado");
+                // if(localStorage.getItem('likes') == null) {
+                //     setTimeout("window.location.href = " + friendlyURL("?module=home&op=view"), 1000);
+                // } else {
+                //     console.log(localStorage.getItem('product'));
+                //     setTimeout("window.location.href = " + friendlyURL("?module=shop&op=view"), 1000);
+                // }
+            }	
         }).fail(function() {
             console.log('Error: Login error');
             // window.location.href = 'index.php?module=errors&op=503&desc=Login error';
@@ -109,18 +112,25 @@ function social_login(param){
     })
     .catch(function(error) {
         console.log('Error: Social login error');
+        var errorCode = error.code;
+        console.log(errorCode);
+        var errorMessage = error.message;
+        console.log(errorMessage);
+        var email = error.email;
+        console.log(email);
+        var credential = error.credential;
+        console.log(credential);
     });
 }
 
 function firebase_config(){
     var config = {
-        apiKey: "AIzaSyAEXsbw5Ttf2RJ4cbaAVVJgD40gWu_7p3s",
-        authDomain: "fair-kingdom-346513.firebaseapp.com",
-        projectId: "fair-kingdom-346513",
-        storageBucket: "fair-kingdom-346513.appspot.com",
-        messagingSenderId: "193372223087",
-        appId: "1:193372223087:web:bb9e65759d8060089ebf9a",
-        measurementId: "G-Y6GBJQGKHJ"
+        apiKey: "AIzaSyAhdUHYxEuScRQ-QDXb9i_epARxjZVxbyA",
+        authDomain: "test--php-js.firebaseapp.com",
+        projectId: "test--php-js",
+        storageBucket: "test--php-js.appspot.com",
+        messagingSenderId: "763984050939",
+        appId: "1:763984050939:web:32c94dd32197ff74830e5e"
     };
     if(!firebase.apps.length){
         firebase.initializeApp(config);
@@ -221,15 +231,14 @@ function register(){
             dataType: "JSON",
             data: data,
         }).done(function(result) {  
-            console.log(result);
             if(result == "error"){		
                 $("#error_email_reg").html('The email is already in use');
                 $("#error_username_reg").html('The username is already in use');
             }else{
                 toastr.options.timeOut = 2000;
                 toastr.success("Email sended");
-                // window.location.href = friendlyURL("?page=login&op=view");
-                // setTimeout(100000, window.location.href = friendlyURL("?module=login&op=view"));
+                // window.location.href = friendlyURL("?module=login&op=view");
+                setTimeout(1000, window.location.href = friendlyURL("?module=login&op=view"));
             }	
         }).fail(function() {
             console.log('Error: Register error');
@@ -308,30 +317,29 @@ function send_recover_password(){
 
 function load_form_new_password(token){
     $.ajax({
-        url: friendlyURL('?page=login&op=verify_token'),
+        url: friendlyURL('?module=login&op=verify_token'),
         dataType: 'json',
         type: "POST",
         data: {token: token},
     }).done(function(data) {
-        if(data == "verify"){
-            console.log(data);
-            $('<form></form>').attr({'id': 'new_password__form', 'method': 'post'}).html('<h2>New password</h2>').appendTo('.container');
-            $('<div></div>').attr({'class': 'form__content'}).appendTo('#new_password__form');
-            $('<div></div>').attr({'class': 'form__input'}).html('<label for="password"><b>Password</b></label>'+
-            '<input type="text" placeholder="Enter password" id="password" name="password" required>'+
-            '<font color="red"><span id="error_password" class="error"></span></font>').appendTo('.form__content');
-            $('<div></div>').attr({'class': 'form__input'}).html('<label for="password1"><b>Password</b></label>'+
-            '<input type="text" placeholder="Enter password" id="password1" name="password1" required>'+
-            '<font color="red"><span id="error_password1" class="error"></span></font>').appendTo('.form__content');
-            $('<div></div>').attr({'class': 'button_container'}).html('<input class="button" id="recover" type="button" value = "Enter"/>').appendTo('.form__content');
-            click_new_password(token); 
-        }else{
-            console.log("error");
-        }
+        console.log(data);
+        // if(data == "verify"){
+        //     console.log(data);
+        //     $('<form></form>').attr({'id': 'new_password__form', 'method': 'post'}).html('<h2>New password</h2>').appendTo('.container');
+        //     $('<div></div>').attr({'class': 'form__content'}).appendTo('#new_password__form');
+        //     $('<div></div>').attr({'class': 'form__input'}).html('<label for="password"><b>Password</b></label>'+
+        //     '<input type="text" placeholder="Enter password" id="password" name="password" required>'+
+        //     '<font color="red"><span id="error_password" class="error"></span></font>').appendTo('.form__content');
+        //     $('<div></div>').attr({'class': 'form__input'}).html('<label for="password1"><b>Password</b></label>'+
+        //     '<input type="text" placeholder="Enter password" id="password1" name="password1" required>'+
+        //     '<font color="red"><span id="error_password1" class="error"></span></font>').appendTo('.form__content');
+        //     $('<div></div>').attr({'class': 'button_container'}).html('<input class="button" id="recover" type="button" value = "Enter"/>').appendTo('.form__content');
+        //     click_new_password(token); 
+        // }else{
+        //     console.log("error");
+        // }
     }).fail(function( textStatus ) {
-        if ( console && console.log ) {
-            console.log( "La solicitud ha fallado: " +  textStatus);
-        }
+        console.log("Error: Verify token error");
     });    
 }
 
@@ -391,27 +399,7 @@ function send_new_password(token){
     }
 }
 
-// ------------------- LOAD CONTENT ------------------------ //
-
-function load_content() {
-    let path = window.location.pathname.split('/');
-    console.log(path);
-    if(path[4] === 'recover'){
-        load_form_new_password(path[5]);
-    }else if (path[4] === 'verify') {
-        /*
-        function verify_email(path[5]){
-            $.ajax({url: friendlyURL('?page=login&op=verify_email')
-        */
-    }else if (path[3] === 'register') {
-        click_register();
-    }else if(path[3] === 'login'){
-        click_login();
-    }
-}
-
 $(document).ready(function(){
-    load_content();
     click_login();
     click_register();
 });

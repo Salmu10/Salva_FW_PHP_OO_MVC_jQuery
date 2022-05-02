@@ -12,10 +12,10 @@
             return self::$_instance;
         }
 
-        public function insert_user($db, $username_reg, $hashed_pass, $email_reg, $avatar, $token_email) {
+        public function insert_user($db, $id, $username_reg, $hashed_pass, $email_reg, $avatar, $token_email) {
 
-            $sql = "INSERT INTO users (username, password, email, user_type, avatar, token_email, activate, id)
-            VALUES ('$username_reg', '$hashed_pass', '$email_reg', 'client', '$avatar', '$token_email', 0, '')";
+            $sql = "INSERT INTO users (id, username, password, email, user_type, avatar, token_email, activate)
+            VALUES ('$id', '$username_reg', '$hashed_pass', '$email_reg', 'client', '$avatar', '$token_email', 0)";
 
             return $stmt = $db->ejecutar($sql);
         }
@@ -46,7 +46,8 @@
 
         public function update_token_jwt($db, $token, $email){
 
-            $sql = "UPDATE users SET id= '$token' WHERE email='$email'";
+            $sql = "UPDATE users SET id = '$token' WHERE email = '$email'";
+
             $stmt = $db->ejecutar($sql);
 
             return "update";
@@ -56,17 +57,24 @@
 
         
 
-        public function select_verify_email($db, $token){
-			$sql = "SELECT `token_email` FROM `users` WHERE `token_email` = '$token'";
+        public function select_verify_email($db, $token_email){
+
+			$sql = "SELECT token_email FROM users WHERE token_email = '$token_email'";
+
             $stmt = $db->ejecutar($sql);
             return $db->listar($stmt);
         } 
 
-        public function update_verify_email($db, $token){
-            $sql = "UPDATE `users` SET `activate`= 1, `token_email`= '' WHERE `token_email` = '$token'";
+        public function update_verify_email($db, $token_email){
+
+            $sql = "UPDATE users SET activate = 1, token_email= '' WHERE token_email = '$token_email'";
+
             $stmt = $db->ejecutar($sql);
             return "update";
         }
+
+
+
 
         public function select_recover_password($db, $email){
 			$sql = "SELECT `email` FROM `users` WHERE email='$email'";
@@ -86,8 +94,13 @@
             return "ok";
         }
 
+
+
+
         public function select_data_user($db, $token){
-			$sql = "SELECT `id`, `nombre`, `email`, `password`, `type`, `avatar`, `token_email`, `activate` FROM `users` WHERE id=$token";
+
+			$sql = "SELECT id, username, password, email, user_type, avatar, token_email, activate FROM users WHERE id = $token";
+            
             $stmt = $db->ejecutar($sql);
             return $db->listar($stmt);
         }

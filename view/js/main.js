@@ -58,14 +58,13 @@ function load_menu() {
 /* MENUS */
 
 function menu_admin() {
-    $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="index.php?page=controller_crud&op=list" class="nav_link">Crud</a>').appendTo('.nav_list');
+    // $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="index.php?page=controller_crud&op=list" class="nav_link">Crud</a>').appendTo('.nav_list');
     $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="" id="logout" class="nav_link">Log out</a>').appendTo('.nav_list');
 }
 
 function menu_client() {
-    // data_profile = data;
     $('<li></li>').attr('class', 'profile').attr('id', 'profile').html('<a id="profile" class="nav_link" data-tr="Profile">Profile</a>').appendTo('.nav_list');
-    $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="index.php?module=errors&op=errors_log" class="nav_link" data-tr="Errors log">Errors log</a>').appendTo('.nav_list');
+    // $('<li></li>').attr('class', 'nav_item').html('<a href="index.php?module=errors&op=errors_log" class="nav_link" data-tr="Errors log">Errors log</a>').appendTo('.nav_list');
 }
 
 /* CLICK PROFILE */
@@ -96,7 +95,7 @@ function click_profile(data) {
 function click_logout() {
     $(document).on('click', '#logout', function() {
         logout();
-        setTimeout('window.location.href = "index.php?module=home&op=home";', 1000);
+        setTimeout(1000, window.location.href = friendlyURL("?module=home&op=view"));
     });
 }
 
@@ -104,19 +103,47 @@ function click_logout() {
 
 function logout() {
     $.ajax({
-        url: 'module/login/controller/controller_login.php?op=logout',
+        url: friendlyURL("?module=login&op=logout"),
         type: 'POST',
         dataType: 'JSON'
     }).done(function(data) {
         localStorage.removeItem('token');
-        window.location.href = "index.php?module=home&op=home";
+        window.location.href = friendlyURL("?module=home&op=view");
         console.log("Sesion cerrada");
     }).fail(function() {
-        window.location.href = 'index.php?module=errors&op=503&desc=Logout error';
+        console.log("Error: Logout error");
+        // window.location.href = 'index.php?module=errors&op=503&desc=Logout error';
     });
+}
+
+// ------------------- LOAD CONTENT ------------------------ //
+
+function load_content() {
+    let path = window.location.pathname.split('/');
+    console.log(path[5]);
+    if(path[5] === 'recover'){
+        console.log('hola recover');
+        // load_form_new_password(path[6]);
+    }else if (path[5] === 'verify') {
+        // console.log(path[6]);
+        ajaxPromise(friendlyURL("?module=login&op=verify_email"), 'POST', 'JSON', {token_email: path[6]})
+        .then(function(data) {
+            console.log(data);
+            window.location.href = friendlyURL("?module=home&op=view");
+        })
+        .catch(function() {
+          console.log('Error: verify email error');
+        });
+
+        /*
+        function verify_email(path[6]){
+            // $.ajax({url: friendlyURL('?page=login&op=verify_email')
+        */
+    }
 }
 
 $(document).ready(function() {
     load_menu();
     click_logout();
+    load_content();
 });
