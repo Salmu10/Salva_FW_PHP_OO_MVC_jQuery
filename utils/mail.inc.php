@@ -13,13 +13,13 @@
                     $email['fromEmail'] = 'secondchanceonti@gmail.com';
                     $email['inputEmail'] = 'secondchanceonti@gmail.com';
                     $email['inputMatter'] = 'Email verification';
-                    $email['inputMessage'] = "<h2>Email verification.</h2><a href='http://localhost/website/login/verify/$email[token]'>Click here for verify your email.</a>";
+                    $email['inputMessage'] = "<h2>Email verification.</h2><a href='http://localhost/Ejercicios/Framework_PHP_OO_MVC/module/login/verify/$email[token]'>Click here for verify your email.</a>";
                     break;
                 case 'recover';
                     $email['fromEmail'] = 'secondchanceonti@gmail.com';
                     $email['inputEmail'] = 'secondchanceonti@gmail.com';
                     $email['inputMatter'] = 'Recover password';
-                    $email['inputMessage'] = "<a href='http://localhost/website/login/recover/$email[token]'>Click here for recover your password.</a>";
+                    $email['inputMessage'] = "<a href='http://localhost/Ejercicios/Framework_PHP_OO_MVC/module/login/verify/$email[token]'>Click here for recover your password.</a>";
                     break;
             }
             return self::send_mailgun($email);
@@ -36,7 +36,8 @@
 
             $message = array();
             $message['from'] = $values['fromEmail'];
-            $message['to'] = $values['toEmail'];
+            // $message['to'] = $values['toEmail'];
+            $message['to'] = 'salmu1997@gmail.com';
             $message['h:Reply-To'] = $values['inputEmail'];
             $message['subject'] = $values['inputMatter'];
             $message['html'] = $values['inputMessage'];

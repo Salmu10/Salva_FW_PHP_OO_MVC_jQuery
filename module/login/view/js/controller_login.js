@@ -17,15 +17,16 @@ function click_login(){
 
     $('#forget_pass').on('click', function(e) {
         e.preventDefault();
-        $('.container').empty();
-        click_recover_password()();
+        load_form_recover_password();
     }); 
 
     $('#google').on('click', function(e) {
-        social_login('google'); 
+        social_login('google');
+        // console.log('google');
     }); 
 
     $('#github').on('click', function(e) {
+        // console.log('github');
         social_login('github');
     }); 
 }
@@ -61,20 +62,21 @@ function login(){
             dataType: "JSON",
             type: "POST",
             data: data,
-        }).done(function(result) {	
-            if(result == "error"){		
-                $("#error_password").html('Wrong password');
-            }else{
-                localStorage.setItem("token", result);
-                toastr.options.timeOut = 3000;
-                toastr.success("Inicio de sesión realizado");
-                if(localStorage.getItem('likes') == null) {
-                    setTimeout("window.location.href = " + friendlyURL("?module=home&op=view"), 1000);
-                } else {
-                    console.log(localStorage.getItem('product'));
-                    setTimeout("window.location.href = " + friendlyURL("?module=shop&op=view"), 1000);
-                }
-            }	
+        }).done(function(result) {
+            console.log(result);
+            // if(result == "error"){		
+            //     $("#error_password").html('Wrong password');
+            // }else{
+            //     localStorage.setItem("token", result);
+            //     toastr.options.timeOut = 3000;
+            //     toastr.success("Inicio de sesión realizado");
+            //     if(localStorage.getItem('likes') == null) {
+            //         setTimeout("window.location.href = " + friendlyURL("?module=home&op=view"), 1000);
+            //     } else {
+            //         console.log(localStorage.getItem('product'));
+            //         setTimeout("window.location.href = " + friendlyURL("?module=shop&op=view"), 1000);
+            //     }
+            // }	
         }).fail(function() {
             console.log('Error: Login error');
             // window.location.href = 'index.php?module=errors&op=503&desc=Login error';
@@ -82,7 +84,7 @@ function login(){
     }
 }
 
-
+///////////////////
 function social_login(param){
     authService = firebase_config();
     authService.signInWithPopup(provider_config(param))
@@ -91,10 +93,19 @@ function social_login(param){
         console.log(result.user.displayName);
         console.log(result.user.email);
         console.log(result.user.photoURL);
-        /*
-        if (result) 
-            $.ajax({url: friendlyURL('?page=login&op=social_login')
-        */
+
+        /////////// INSERT USER EN LA BD?? ////////////
+
+        // if (result) 
+        //     ajaxPromise(friendlyURL("?module=login&op=social_login"), 'POST', 'JSON', result)
+        //     .then(function(data) {
+        //         console.log(data);
+        //         // click_recover_password();
+        //     })
+        //     .catch(function() {
+        //         console.log('Error: Social login error');
+        //         // window.location.href = 'index.php?module=errors&op=503&desc=Types error';
+        //     });
     })
     .catch(function(error) {
         console.log('Error: Social login error');
@@ -103,12 +114,13 @@ function social_login(param){
 
 function firebase_config(){
     var config = {
-        apiKey: "AIzaSyCr9CQIJ6QikNWaM1UveNjwugyqWKUIxy0",
-        authDomain: "test-php-js.firebaseapp.com",
-        databaseURL: "https://test-php-js.firebaseio.com",
-        projectId: "test-php-js",
-        storageBucket: "",
-        messagingSenderId: "613764177727"
+        apiKey: "AIzaSyAEXsbw5Ttf2RJ4cbaAVVJgD40gWu_7p3s",
+        authDomain: "fair-kingdom-346513.firebaseapp.com",
+        projectId: "fair-kingdom-346513",
+        storageBucket: "fair-kingdom-346513.appspot.com",
+        messagingSenderId: "193372223087",
+        appId: "1:193372223087:web:bb9e65759d8060089ebf9a",
+        measurementId: "G-Y6GBJQGKHJ"
     };
     if(!firebase.apps.length){
         firebase.initializeApp(config);
@@ -208,13 +220,16 @@ function register(){
             type: "POST",
             dataType: "JSON",
             data: data,
-        }).done(function(result) {   
+        }).done(function(result) {  
+            console.log(result);
             if(result == "error"){		
-                $("#error_email_reg").html('El email ya esta registrado');
+                $("#error_email_reg").html('The email is already in use');
+                $("#error_username_reg").html('The username is already in use');
             }else{
-                toastr.options.timeOut = 3000;
+                toastr.options.timeOut = 2000;
                 toastr.success("Email sended");
-                setTimeout("window.location.href = " + friendlyURL("?module=login&op=view"), 1000);
+                // window.location.href = friendlyURL("?page=login&op=view");
+                // setTimeout(100000, window.location.href = friendlyURL("?module=login&op=view"));
             }	
         }).fail(function() {
             console.log('Error: Register error');
@@ -225,8 +240,21 @@ function register(){
 
 // ------------------- RECOVER PASSWORD ------------------------ //
 
+function load_form_recover_password(){
+    // console.log('Hola');
+    ajaxPromise(friendlyURL("?module=login&op=recover_view"), 'POST', 'JSON')
+    .then(function( data ) {
+        console.log(data);
+        click_recover_password();
+    })
+    .catch(function() {
+      console.log('Error: Recover view error');
+      // window.location.href = 'index.php?module=errors&op=503&desc=Types error';
+    });
+}
+
 function click_recover_password(){
-    $("#recover_pass").keypress(function(e) {
+    $("#forget_form").keypress(function(e) {
         var code = (e.keyCode ? e.keyCode : e.which);
         if(code==13){
         	e.preventDefault();
@@ -234,7 +262,7 @@ function click_recover_password(){
         }
     });
 
-    $('#button_email').on('click', function(e) {
+    $('#button_recover').on('click', function(e) {
         e.preventDefault();
         send_recover_password();
     }); 
@@ -270,11 +298,10 @@ function send_recover_password(){
             type: "POST",
             data: data,
         }).done(function(data) {
-            toastr.success('Email sended');
+            toastr.options.timeOut = 3000;
+            toastr.success("Email sended");
         }).fail(function( textStatus ) {
-            if ( console && console.log ) {
-                console.log( "La solicitud ha fallado: " +  textStatus);
-            }
+            console.log('Error: Recover password error');
         });    
     }
 }
@@ -365,23 +392,26 @@ function send_new_password(token){
 }
 
 // ------------------- LOAD CONTENT ------------------------ //
+
 function load_content() {
     let path = window.location.pathname.split('/');
-    $('.container').empty();
-    if(path[3] === 'recover'){
-        load_form_new_password(path[4]);
-    }else if (path[3] === 'verify') {
+    console.log(path);
+    if(path[4] === 'recover'){
+        load_form_new_password(path[5]);
+    }else if (path[4] === 'verify') {
         /*
-        function verify_email(path[4]){
+        function verify_email(path[5]){
             $.ajax({url: friendlyURL('?page=login&op=verify_email')
         */
-    }else if (path[2] === 'register') {
+    }else if (path[3] === 'register') {
         click_register();
-    }else if(path[2] === 'login'){
+    }else if(path[3] === 'login'){
         click_login();
     }
 }
 
 $(document).ready(function(){
-    load_content(); 
+    load_content();
+    click_login();
+    click_register();
 });

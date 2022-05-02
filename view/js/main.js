@@ -40,20 +40,19 @@ function load_menu() {
     $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + friendlyURL("?module=home&op=view") + '" class="nav_link">Home</a>').appendTo('.nav_list');
     $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + friendlyURL("?module=shop&op=view") + '" class="nav_link">Shop</a>').appendTo('.nav_list');
     $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + friendlyURL("?module=contact&op=view") + '" class="nav_link">Contact us</a>').appendTo('.nav_list');
-    $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + friendlyURL("?module=errors&op=errors_log") + '" class="nav_link" data-tr="Errors log">Errors log</a>').appendTo('.nav_list');
-    // $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="index.php?module=contact&op=view" class="nav_link">Contact us</a>').appendTo('.nav_list'); 
-    // ajaxPromise('module/login/controller/controller_login.php?op=data_user', 'POST', 'JSON', {token: localStorage.getItem('token')})
-    // .then(function(data) {
-    //     if (data.user_type === 'admin') {
-    //         menu_admin();
-    //     }else if (data.user_type === 'client') {
-    //         menu_client();
-    //     }
-    //     click_profile(data);
-    // }).catch(function() {
-    //     $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="index.php?module=login&op=login_view" class="nav_link" data-tr="Log in">Log in</a>').appendTo('.nav_list');
-    //     $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="index.php?module=errors&op=errors_log" class="nav_link" data-tr="Errors log">Errors log</a>').appendTo('.nav_list');
-    // });
+    // $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + friendlyURL("?module=errors&op=errors_log") + '" class="nav_link" data-tr="Errors log">Errors log</a>').appendTo('.nav_list');
+    ajaxPromise(friendlyURL('?module=login&op=data_user'), 'POST', 'JSON', {token: localStorage.getItem('token')})
+    .then(function(data) {
+        if (data.user_type === 'admin') {
+            menu_admin();
+        }else if (data.user_type === 'client') {
+            menu_client();
+        }
+        click_profile(data);
+    }).catch(function() {
+        $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + friendlyURL("?module=login&op=view") + '" class="nav_link" data-tr="Log in">Log in</a>').appendTo('.nav_list');
+        // $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="index.php?module=errors&op=errors_log" class="nav_link" data-tr="Errors log">Errors log</a>').appendTo('.nav_list');
+    });
 }
 
 /* MENUS */

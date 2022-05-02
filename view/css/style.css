@@ -1220,7 +1220,7 @@ label.etiquetas {
 
 .hr{
 	height: 2px;
-	margin: 40px 0 50px 0;
+	margin: 30px 0 30px 0;
 	background: rgba(255,255,255,.2);
 }
 
@@ -1231,6 +1231,56 @@ label.etiquetas {
 
 .foot-lnk a{
     color: #FFFFFF;
+}
+
+.social_login {
+    display: block;
+    margin-top: 30px;
+    margin-bottom: 150px;
+}
+
+.google_login {
+    display: block;
+    float: left;
+    margin-left: 100px;
+}
+
+.google_title {
+    text-align: center;
+    color: white;
+    font-size: 15px;
+}
+
+.google_img {
+    display: inline-block;
+    height: 60px;
+    width: 60px;
+    border-style: none;
+    border-radius: 0px;
+    background-image: url(../images/google.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.github_login {
+    display: block;
+    float: right;
+    margin-right: 100px;
+}
+
+.github_title {
+    text-align: center;
+    color: white;
+    font-size: 15px;
+}
+
+.github_img {
+    display: inline-block;
+    height: 60px;
+    width: 60px;
+    background-image: url(../images/github.png);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 /* Profile */

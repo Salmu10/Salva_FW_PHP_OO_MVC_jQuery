@@ -12,10 +12,12 @@
             $topPage = VIEW_PATH_INC . $topPage;
             if ((file_exists($topPage)) && (file_exists($view))) {
                 require_once ($topPage);
-                require_once (VIEW_PATH_INC . 'header.html');
+                require_once ('C:/xampp/htdocs/Ejercicios/Framework_PHP_OO_MVC/view/inc/header.html');
+                // require_once (VIEW_PATH_INC . 'header.html');
                 require_once ($view);
                 require_once (VIEW_PATH_INC . 'footer.html');
             }else {
+                die('<script>console.log('.json_encode('Hola') .');</script>');
                 self::load_error();
             }
         }
@@ -23,7 +25,7 @@
         public static function load_model($model, $function = null, $args = null) {
             $dir = explode('_', $model);
             $path = constant('MODEL_' . strtoupper($dir[0])) .  $model . '.class.singleton.php';
-            // $path = 'C:/xampp/htdocs/Ejercicios/Framework_PHP_OO_MVC/module/home/model/model/home_model.class.singleton.php';
+            // $path = 'C:/xampp/htdocs/Ejercicios/Framework_PHP_OO_MVC/module/login/model/model/login_model.class.singleton.php';
             // die('<script>console.log('.json_encode( 'hey' ) .');</script>');
             if (file_exists($path)) {
                 require_once ($path);
