@@ -120,7 +120,7 @@ function logout() {
 
 function load_content() {
     let path = window.location.pathname.split('/');
-    console.log(path[5]);
+    // console.log(path[5]);
     if(path[5] === 'recover'){
         console.log('hola recover');
         // load_form_new_password(path[6]);

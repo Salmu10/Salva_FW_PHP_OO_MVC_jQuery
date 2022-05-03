@@ -98,6 +98,7 @@ function load_filters() {
 }
 
 function orderby() {
+    console.log('Hola');
 
     var orderby = [];
 
@@ -498,7 +499,7 @@ function like_storage(id){
     localStorage.setItem('likes', JSON.stringify(like));
 }
 
-function load_content(){
+function load_content_shop(){
     if (localStorage.getItem('currentPage') == 'shop-details') {
         load_details();
         redirect();
@@ -512,8 +513,8 @@ function load_content(){
 }
 
 $(document).ready(function() {
-    load_content();
-    // localStorage.setItem('currentPage', 'shop-list');
-    // localStorage.setItem('filters', '');
+    load_content_shop();
+    localStorage.setItem('currentPage', 'shop-list');
+    localStorage.setItem('filters', '');
     // click_like();
 });

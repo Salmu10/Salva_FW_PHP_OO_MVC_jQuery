@@ -93,25 +93,31 @@ function social_login(param){
     authService.signInWithPopup(provider_config(param))
     .then(function(result) {
         console.log('Hemos autenticado al usuario ', result.user);
-        console.log(result.user.displayName);
-        console.log(result.user.email);
-        console.log(result.user.photoURL);
+        // console.log(result.user.displayName);
+        // console.log(result.user.email);
+        // console.log(result.user.photoURL);
 
-        /////////// INSERT USER EN LA BD?? ////////////
+        // /////////// INSERT USER EN LA BD?? ////////////
+        email_name = result.user.email;
+        let username = email_name.split('@');
+        console.log(username[0]);
 
-        // if (result) 
-        //     ajaxPromise(friendlyURL("?module=login&op=social_login"), 'POST', 'JSON', result)
-        //     .then(function(data) {
-        //         console.log(data);
-        //         // click_recover_password();
-        //     })
-        //     .catch(function() {
-        //         console.log('Error: Social login error');
-        //         // window.location.href = 'index.php?module=errors&op=503&desc=Types error';
-        //     });
+        social_user = {id: result.user.uid, username: username[0], email: result.user.email, avatar: result.user.photoURL};
+
+        if (result) {
+            ajaxPromise(friendlyURL("?module=login&op=social_login"), 'POST', 'JSON', social_user)
+            .then(function(data) {
+                console.log(data);
+                // click_recover_password();
+            })
+            .catch(function() {
+                console.log('Error: Social login error');
+                // window.location.href = 'index.php?module=errors&op=503&desc=Types error';
+            });
+        }
     })
     .catch(function(error) {
-        console.log('Error: Social login error');
+        // console.log('Error: Social login error');
         var errorCode = error.code;
         console.log(errorCode);
         var errorMessage = error.message;
@@ -125,12 +131,13 @@ function social_login(param){
 
 function firebase_config(){
     var config = {
-        apiKey: "AIzaSyAhdUHYxEuScRQ-QDXb9i_epARxjZVxbyA",
-        authDomain: "test--php-js.firebaseapp.com",
-        projectId: "test--php-js",
-        storageBucket: "test--php-js.appspot.com",
-        messagingSenderId: "763984050939",
-        appId: "1:763984050939:web:32c94dd32197ff74830e5e"
+        apiKey: "AIzaSyBOo5emMZXMi0T411OPKgoDGcvDl_IKSno",
+        authDomain: "test-php-js-7fc12.firebaseapp.com",
+        projectId: "test-php-js-7fc12",
+        storageBucket: "test-php-js-7fc12.appspot.com",
+        messagingSenderId: "495514694215",
+        appId: "1:495514694215:web:b183cd7f513ce8b0d6f762",
+        measurementId: "G-JXEGLTGLTC"
     };
     if(!firebase.apps.length){
         firebase.initializeApp(config);

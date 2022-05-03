@@ -23,13 +23,21 @@
 			$avatar = "https://robohash.org/$hashavatar";
 			$token_email = common::generate_Token_secure(20);
 			$id = common::generate_Token_secure(6);
-			
-			if($this -> dao -> insert_user($this->db, $id, $args[0], $hashed_pass, $args[2], $avatar, $token_email)){
-				$this -> dao -> insert_user($this->db, $id, $args[0], $hashed_pass, $args[2], $avatar, $token_email);;
-				return $token_email;
-			} else {
+
+			// $user = $this -> dao -> select_user($this->db, $args[0]);
+			if (!empty($this -> dao -> select_user($this->db, $args[0]))) {
 				return 'error';
+            } else {
+				$this -> dao -> insert_user($this->db, $id, $args[0], $hashed_pass, $args[2], $avatar, $token_email);
+				return $token_email;
 			}
+			
+			// if($this -> dao -> insert_user($this->db, $id, $args[0], $hashed_pass, $args[2], $avatar, $token_email)){
+			// 	$this -> dao -> insert_user($this->db, $id, $args[0], $hashed_pass, $args[2], $avatar, $token_email);
+			// 	return $token_email;
+			// } else {
+			// 	return 'error';
+			// }
 		}
 
 		public function get_login_BLL($args) {
@@ -38,7 +46,6 @@
 			if ($user[0]['activate'] == 1) {
 				if (password_verify($args[1], $user[0]['password'])) {
 					$jwt = jwt_process::encode($user[0]['username']);
-					$this -> dao -> update_token_jwt($this->db, $jwt, $user[0]['email']);
 					return json_encode($jwt);
 				} else {
 					return $user;
@@ -50,10 +57,19 @@
 
 		public function get_social_login_BLL($args) {
 
-			$user = $this -> dao -> select_user($this->db, $args);
-			$jwt = jwt_process::encode($user[0]['username']);
+			// $user = $this -> dao -> select_user($this->db, $args[1]);
+			// return json_encode($this -> dao -> select_user($this->db, $args[1]));
 
-			return json_encode($jwt);
+			if (!empty($this -> dao -> select_user($this->db, $args[1]))) {
+				$user = $this -> dao -> select_user($this->db, $args[1]);
+				$jwt = jwt_process::encode($user[0]['username']);
+				return json_encode($jwt);
+            } else {
+				$this -> dao -> insert_social_login($this->db, $args[0], $args[1], $args[2], $args[3]);
+				$user = $this -> dao -> select_user($this->db, $args[1]);
+				$jwt = jwt_process::encode($user[0]['username']);
+				return json_encode($jwt);
+			}
 		}
 
 		public function get_verify_email_BLL($args) {
@@ -67,7 +83,6 @@
 		}
 
 
-		
 
 		public function get_recover_email_BBL($args) {
 			$user = $this -> dao -> select_recover_password($this->db, $args);

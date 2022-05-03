@@ -17,6 +17,10 @@
         <uri>register</uri>
     </function>
     <function>
+        <name>social_login</name>
+        <uri>social_login</uri>
+    </function>
+    <function>
         <name>logout</name>
         <uri>logout</uri>
     </function>

@@ -38,8 +38,8 @@
 
         public function insert_social_login($db, $id, $username, $email, $avatar){
 
-            $sql ="INSERT INTO users (username, password, email, user_type, avatar, token_email, activate, id)     
-                VALUES ('$username', '', '$email', 'client', '$avatar', '', 1, '$id')";
+            $sql ="INSERT INTO users (id, username, password, email, user_type, avatar, token_email, activate)     
+                VALUES ('$id', '$username', '', '$email', 'client', '$avatar', '', 1)";
 
             return $stmt = $db->ejecutar($sql);
         }
