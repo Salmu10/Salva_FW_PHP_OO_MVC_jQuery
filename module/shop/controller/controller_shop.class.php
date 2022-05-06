@@ -39,8 +39,9 @@
             echo json_encode(common::load_model('shop_model', 'get_cars', [$_POST['category'], $_POST['type'], $_POST['id'], $_POST['loaded'], $_POST['items']]));
         }
 
-        function load_like() {
-            echo json_encode(common::load_model('shop_model', 'get_load_like', $_GET['token']));
+        function load_likes() {
+            // echo json_encode($_POST['token']);
+            echo json_encode(common::load_model('shop_model', 'get_load_likes', $_POST['token']));
         }
 
         function control_likes() {

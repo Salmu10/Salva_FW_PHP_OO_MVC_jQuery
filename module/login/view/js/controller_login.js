@@ -64,21 +64,24 @@ function login(){
             data: data,
         }).done(function(result) {
             console.log(result);
-            if(result == "error"){		
+            if(result == "user error"){		
+                $("#error_username").html("The email or username does't exist");
+            } else if (result == "error"){
                 $("#error_password").html('Wrong password');
             } else if (result == "activate error"){
                 toastr.options.timeOut = 3000;
-                toastr.error("Verify the email");               
+                toastr.error("Verify the email");            
             } else {
-                // localStorage.setItem("token", result);
+                localStorage.setItem("token", result);
                 toastr.options.timeOut = 3000;
                 toastr.success("Inicio de sesión realizado");
-                // if(localStorage.getItem('likes') == null) {
-                //     setTimeout("window.location.href = " + friendlyURL("?module=home&op=view"), 1000);
-                // } else {
-                //     console.log(localStorage.getItem('product'));
-                //     setTimeout("window.location.href = " + friendlyURL("?module=shop&op=view"), 1000);
-                // }
+                if(localStorage.getItem('likes') == null) {
+                    console.log('Hola');
+                    window.location.href = friendlyURL("?module=home&op=view");
+                } else {
+                    console.log(localStorage.getItem('product'));
+                    window.location.href = friendlyURL("?module=shop&op=view");
+                }
             }	
         }).fail(function() {
             console.log('Error: Login error');
@@ -87,17 +90,13 @@ function login(){
     }
 }
 
-///////////////////
 function social_login(param){
     authService = firebase_config();
     authService.signInWithPopup(provider_config(param))
     .then(function(result) {
-        console.log('Hemos autenticado al usuario ', result.user);
-        // console.log(result.user.displayName);
-        // console.log(result.user.email);
-        // console.log(result.user.photoURL);
 
-        // /////////// INSERT USER EN LA BD?? ////////////
+        console.log('Hemos autenticado al usuario ', result.user);
+
         email_name = result.user.email;
         let username = email_name.split('@');
         console.log(username[0]);
@@ -107,8 +106,16 @@ function social_login(param){
         if (result) {
             ajaxPromise(friendlyURL("?module=login&op=social_login"), 'POST', 'JSON', social_user)
             .then(function(data) {
-                console.log(data);
-                // click_recover_password();
+                localStorage.setItem("token", data);
+                toastr.options.timeOut = 3000;
+                toastr.success("Inicio de sesión realizado");
+                if(localStorage.getItem('likes') == null) {
+                    console.log('hola');
+                    setTimeout(1000, window.location.href = friendlyURL("?module=home&op=view"));
+                } else {
+                    console.log(localStorage.getItem('product'));
+                    setTimeout(1000, window.location.href = friendlyURL("?module=shop&op=view"));
+                };
             })
             .catch(function() {
                 console.log('Error: Social login error');
@@ -184,7 +191,6 @@ function validate_register(){
 		error = true;
 	}else{
         if(document.getElementById('username_reg').value.length > 15 || document.getElementById('username_reg').value.length < 5){
-            console.log("hola");
             document.getElementById('error_username_reg').innerHTML = "The username must be between 5 and 15 characters";
             error = true;
         }else{
@@ -257,20 +263,14 @@ function register(){
 // ------------------- RECOVER PASSWORD ------------------------ //
 
 function load_form_recover_password(){
-    // console.log('Hola');
-    ajaxPromise(friendlyURL("?module=login&op=recover_view"), 'POST', 'JSON')
-    .then(function( data ) {
-        console.log(data);
-        click_recover_password();
-    })
-    .catch(function() {
-      console.log('Error: Recover view error');
-      // window.location.href = 'index.php?module=errors&op=503&desc=Types error';
-    });
+    $(".login-wrap").hide();
+    $(".forget_html").show();
+    $('html, body').animate({scrollTop: $(".forget_html")});
+    click_recover_password();
 }
 
 function click_recover_password(){
-    $("#forget_form").keypress(function(e) {
+    $(".forget_html").keypress(function(e) {
         var code = (e.keyCode ? e.keyCode : e.which);
         if(code==13){
         	e.preventDefault();
@@ -288,15 +288,15 @@ function validate_recover_password(){
     var mail_exp = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
     var error = false;
 
-    if(document.getElementById('email').value.length === 0){
-		document.getElementById('error_email').innerHTML = "Tienes que escribir un correo";
+    if(document.getElementById('email_forg').value.length === 0){
+		document.getElementById('error_email_forg').innerHTML = "Tienes que escribir un correo";
 		error = true;
 	}else{
-        if(!mail_exp.test(document.getElementById('email').value)){
-            document.getElementById('error_email').innerHTML = "El formato del mail es invalido"; 
+        if(!mail_exp.test(document.getElementById('email_forg').value)){
+            document.getElementById('error_email_forg').innerHTML = "El formato del mail es invalido"; 
             error = true;
         }else{
-            document.getElementById('error_email').innerHTML = "";
+            document.getElementById('error_email_forg').innerHTML = "";
         }
     }
 	
@@ -307,106 +307,139 @@ function validate_recover_password(){
 
 function send_recover_password(){
     if(validate_recover_password() != 0){
-        var data = { email : $('#email').val()};
+        var data = $('#recover_email_form').serialize();
         $.ajax({
             url: friendlyURL('?module=login&op=send_recover_email'),
             dataType: 'json',
             type: "POST",
             data: data,
         }).done(function(data) {
-            toastr.options.timeOut = 3000;
-            toastr.success("Email sended");
+            if(data == "error"){		
+                $("#error_email_forg").html("The email doesn't exist");
+            } else{
+                toastr.options.timeOut = 3000;
+                toastr.success("Email sended");
+                setTimeout(1000, window.location.href = friendlyURL("?module=login&op=view"));
+            }
         }).fail(function( textStatus ) {
             console.log('Error: Recover password error');
         });    
     }
 }
 
-function load_form_new_password(token){
+function load_form_new_password(){
+    token_email = localStorage.getItem('token_email');
+    localStorage.removeItem('token_email');
     $.ajax({
         url: friendlyURL('?module=login&op=verify_token'),
         dataType: 'json',
         type: "POST",
-        data: {token: token},
+        data: {token_email: token_email},
     }).done(function(data) {
-        console.log(data);
-        // if(data == "verify"){
-        //     console.log(data);
-        //     $('<form></form>').attr({'id': 'new_password__form', 'method': 'post'}).html('<h2>New password</h2>').appendTo('.container');
-        //     $('<div></div>').attr({'class': 'form__content'}).appendTo('#new_password__form');
-        //     $('<div></div>').attr({'class': 'form__input'}).html('<label for="password"><b>Password</b></label>'+
-        //     '<input type="text" placeholder="Enter password" id="password" name="password" required>'+
-        //     '<font color="red"><span id="error_password" class="error"></span></font>').appendTo('.form__content');
-        //     $('<div></div>').attr({'class': 'form__input'}).html('<label for="password1"><b>Password</b></label>'+
-        //     '<input type="text" placeholder="Enter password" id="password1" name="password1" required>'+
-        //     '<font color="red"><span id="error_password1" class="error"></span></font>').appendTo('.form__content');
-        //     $('<div></div>').attr({'class': 'button_container'}).html('<input class="button" id="recover" type="button" value = "Enter"/>').appendTo('.form__content');
-        //     click_new_password(token); 
-        // }else{
-        //     console.log("error");
-        // }
+        if(data == "verify"){
+            console.log('verified');
+            click_new_password(token_email); 
+        }else {
+            console.log("error");
+        }
     }).fail(function( textStatus ) {
         console.log("Error: Verify token error");
     });    
 }
 
-function click_new_password(token){
-    $("#new_password__form").keypress(function(e) {
+function click_new_password(token_email){
+    $(".recover_html").keypress(function(e) {
         var code = (e.keyCode ? e.keyCode : e.which);
         if(code==13){
         	e.preventDefault();
-            send_new_password(token);
+            send_new_password(token_email);
         }
     });
 
-    $('#recover').on('click', function(e) {
+    $('#button_set_pass').on('click', function(e) {
         e.preventDefault();
-        send_new_password(token);
+        send_new_password(token_email);
     }); 
 }
 
 function validate_new_password(){
-    if(document.getElementById('password').value.length === 0){
-        document.getElementById('error_password1').innerHTML = "";
-		document.getElementById('error_password').innerHTML = "Tienes que escribir la contraseña";
+
+    var error = false;
+
+    if(document.getElementById('pass_rec').value.length === 0){
+		document.getElementById('error_password_rec').innerHTML = "You have to write a password";
 		error = true;
 	}else{
-        if(document.getElementById('password').value.length < 8){
-            document.getElementById('error_password1').innerHTML = "";
-            document.getElementById('error_password').innerHTML = "La password tiene que tener 8 caracteres como minimo";
+        if(document.getElementById('pass_rec').value.length < 8){
+            document.getElementById('error_password_rec').innerHTML = "The password must be longer than 8 characters";
             error = true;
         }else{
-            if(document.getElementById('password').value !== document.getElementById('password1').value){
-                document.getElementById('error_password').innerHTML = "";
-                document.getElementById('error_password1').innerHTML = "Las contraseñas no son iguales";
-                error = true;
-            }else{
-                document.getElementById('error_password').innerHTML = "";
-            }
+            document.getElementById('error_password_rec').innerHTML = "";
         }
+    }
+
+    if(document.getElementById('pass_rec_2').value != document.getElementById('pass_rec').value){
+		document.getElementById('error_password_rec_2').innerHTML = "Passwords don't match";
+		error = true;
+	}else{
+        document.getElementById('error_password_rec_2').innerHTML = "";
+    }
+
+    if(error == true){
+        return 0;
     }
 }
 
-function send_new_password(token){
+function send_new_password(token_email){
     if(validate_new_password() != 0){
-        var data = {token: token, password : $('#password').val()};
-        console.log(data);
+        var data = {token_email: token_email, password : $('#pass_rec').val()};
         $.ajax({
-            url: friendlyURL("?page=login&op=new_password"),
+            url: friendlyURL("?module=login&op=new_password"),
             type: "POST",
             dataType: "JSON",
             data: data,
         }).done(function(data) {
-            toastr.success('New password');
-        }).fail(function( textStatus ) {
-            if ( console && console.log ) {
-                console.log( "La solicitud ha fallado: " +  textStatus);
+            if(data == "done"){
+                toastr.options.timeOut = 3000;
+                toastr.success('New password changed');
+                setTimeout(1000, window.location.href = friendlyURL("?module=login&op=view"));
+            } else {
+                toastr.options.timeOut = 3000;
+                toastr.error('Error seting new password');
             }
+        }).fail(function(textStatus) {
+            console.log("Error: New password error");
         });    
     }
 }
 
+// ------------------- LOAD CONTENT ------------------------ //
+
+function load_content() {
+    let path = window.location.pathname.split('/');
+    // console.log(path);
+    if(path[5] === 'recover'){
+        window.location.href = friendlyURL("?module=login&op=recover_view");
+        localStorage.setItem("token_email", path[6]);
+    }else if (path[5] === 'verify') {
+        ajaxPromise(friendlyURL("?module=login&op=verify_email"), 'POST', 'JSON', {token_email: path[6]})
+        .then(function(data) {
+            // console.log(data);
+            window.location.href = friendlyURL("?module=home&op=view");
+        })
+        .catch(function() {
+          console.log('Error: verify email error');
+        });
+    }else if (path[4] === 'view') {
+        $(".login-wrap").show();
+        $(".forget_html").hide();
+    }else if (path[4] === 'recover_view') {
+        load_form_new_password();
+    }
+}
+
 $(document).ready(function(){
+    load_content();
     click_login();
     click_register();
 });

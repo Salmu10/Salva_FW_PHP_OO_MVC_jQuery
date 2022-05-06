@@ -48,19 +48,22 @@
 			return $this -> dao -> select_cars($this->db, $args[0], $args[1], $args[2], $args[3], $args[4]);
 		}
 
-		public function get_load_like_BLL($args) {
-			$jwt = jwt_process::decode($args);
-			$jwt = json_decode($jwt, TRUE);
-			return $this -> dao -> select_load_likes($this->db, $jwt['name']);
+		public function get_load_likes_BLL($args) {
+
+			$token = explode('"', $args);
+			$decode = middleware::decode_username($token[1]);
+			return $this -> dao -> select_load_likes($this->db, $decode);
 		}
 
 		public function get_control_likes_BLL($args) {
-			$jwt = jwt_process::decode($args[1]);
-			$jwt = json_decode($jwt, TRUE);
-			if ($this -> dao -> select_likes($this->db, $args[0], $jwt['name'])) {
-				return $this -> dao -> delete_likes($this->db, $args[0], $jwt['name']);
+
+			$token = explode('"', $args[1]);
+			$decode = middleware::decode_username($token[1]);
+
+			if ($this -> dao -> select_likes($this->db, $args[0], $decode)) {
+				return $this -> dao -> delete_likes($this->db, $args[0], $decode);
 			}
-			return $this -> dao -> insert_likes($this->db, $args[0], $jwt['name']);
+			return $this -> dao -> insert_likes($this->db, $args[0], $decode);
 		}
 	}
 ?>

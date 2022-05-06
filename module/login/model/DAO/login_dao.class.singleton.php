@@ -20,9 +20,9 @@
             return $stmt = $db->ejecutar($sql);
         }
        
-        public function select_user($db, $username){
+        public function select_user($db, $username, $email){
 
-			$sql = "SELECT id, username, password, email, user_type, avatar, token_email, activate FROM users WHERE username='$username'";
+			$sql = "SELECT id, username, password, email, user_type, avatar, token_email, activate FROM users WHERE username = '$username' OR email = '$email'";
 
             $stmt = $db->ejecutar($sql);
             return $db->listar($stmt);
@@ -44,19 +44,6 @@
             return $stmt = $db->ejecutar($sql);
         }
 
-        public function update_token_jwt($db, $token, $email){
-
-            $sql = "UPDATE users SET id = '$token' WHERE email = '$email'";
-
-            $stmt = $db->ejecutar($sql);
-
-            return "update";
-        }
-
-
-
-        
-
         public function select_verify_email($db, $token_email){
 
 			$sql = "SELECT token_email FROM users WHERE token_email = '$token_email'";
@@ -73,23 +60,23 @@
             return "update";
         }
 
-
-
-
         public function select_recover_password($db, $email){
-			$sql = "SELECT `email` FROM `users` WHERE email='$email'";
+			$sql = "SELECT `email` FROM `users` WHERE email = '$email' AND password NOT LIKE ('')";
             $stmt = $db->ejecutar($sql);
             return $db->listar($stmt);
         }
 
-        public function update_recover_password($db, $email, $token){
-			$sql = "UPDATE `users` SET `token_email`= '$token' WHERE `email` = '$email'";
+        
+
+
+        public function update_recover_password($db, $email, $token_email){
+			$sql = "UPDATE `users` SET `token_email`= '$token_email' WHERE `email` = '$email'";
             $stmt = $db->ejecutar($sql);
             return "ok";
         }
 
-        public function update_new_passwoord($db, $token, $password){
-            $sql = "UPDATE `users` SET `password`= '$password', `token_email`= '' WHERE `token_email` = '$token'";
+        public function update_new_passwoord($db, $token_email, $password){
+            $sql = "UPDATE `users` SET `password`= '$password', `token_email`= '' WHERE `token_email` = '$token_email'";
             $stmt = $db->ejecutar($sql);
             return "ok";
         }
@@ -97,9 +84,9 @@
 
 
 
-        public function select_data_user($db, $token){
+        public function select_data_user($db, $username){
 
-			$sql = "SELECT id, username, password, email, user_type, avatar, token_email, activate FROM users WHERE id = $token";
+			$sql = "SELECT id, username, password, email, user_type, avatar, token_email, activate FROM users WHERE username = '$username'";
             
             $stmt = $db->ejecutar($sql);
             return $db->listar($stmt);

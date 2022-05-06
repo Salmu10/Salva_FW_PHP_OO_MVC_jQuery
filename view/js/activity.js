@@ -1,7 +1,7 @@
 function protecturl() {
 	$.ajax({
 		type : 'POST',
-		url  : 'module/login/controller/controller_login.php?&op=controluser',
+		url  : friendlyURL("?module=login&op=controluser"),
 		data :  {token: localStorage.getItem('token')}
 	})
 	.done(function(data){
@@ -21,8 +21,8 @@ function protecturl() {
 function protect_activity() {
 	setInterval(function(){
 		$.ajax({
-			type : 'GET',
-			url  : 'module/login/controller/controller_login.php?&op=actividad',
+			type : 'POST',
+			url  : friendlyURL("?module=login&op=activity"),
 			success :  function(response){
 				if(response == "inactivo"){
 					toastr.options.timeOut = 2000;
@@ -41,10 +41,11 @@ function token_expires() {
 		} else {
 			$.ajax({
 				type : 'POST',
-				url  : 'module/login/controller/controller_login.php?&op=token_expires',
+				url  : friendlyURL("?module=login&op=token_expires"),
 				data :  {token: localStorage.getItem('token')}
 			})
 			.done(function(data){
+				console.log(data);
 				if (data == "activo"){
 					console.log(data);
 				}else if (data == "inactivo"){
@@ -63,8 +64,8 @@ function token_expires() {
 function refresh_session() {
 	setInterval(function(){
 		$.ajax({
-			type : 'GET',
-			url  : 'module/login/controller/controller_login.php?&op=refresh_cookie',
+			type : 'POST',
+			url  : friendlyURL("?module=login&op=refresh_cookie"),
 		}).done(function(data){			
 			console.log("$Session updated");
 		})
@@ -78,10 +79,9 @@ function refresh_token() {
 	setInterval(function(){
 		$.ajax({
 			type : 'POST',
-			url  : 'module/login/controller/controller_login.php?&op=refresh_token',
+			url  : friendlyURL("?module=login&op=refresh_token"),
 			data :  {token: localStorage.getItem('token')}
 		}).done(function(data){			
-			// console.log(data);
 			localStorage.setItem("token", data);
 		})
 		.fail( function(response){

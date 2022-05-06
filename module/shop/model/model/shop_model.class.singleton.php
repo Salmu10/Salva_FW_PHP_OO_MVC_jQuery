@@ -46,8 +46,8 @@
             return $this -> bll -> get_cars_BLL($args);
         }
 
-        public function get_load_like($args) {
-            return $this -> bll -> get_load_like_BLL($args);
+        public function get_load_likes($args) {
+            return $this -> bll -> get_load_likes_BLL($args);
         }
 
         public function get_control_likes($args) {

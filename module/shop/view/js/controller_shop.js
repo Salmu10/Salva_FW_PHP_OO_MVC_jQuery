@@ -98,8 +98,7 @@ function load_filters() {
 }
 
 function orderby() {
-    console.log('Hola');
-
+    
     var orderby = [];
 
     localStorage.setItem('orderby', orderby);
@@ -218,7 +217,7 @@ function load_list_cars(total_prod = 0, items_page = 5) {
             }
         }
         load_map(data);
-        // load_like();
+        load_like();
     })
     .catch(function() {
         console.log('Error: List cars error');
@@ -301,7 +300,7 @@ function load_details() {
         )
         load_map_details(data);
         load_more(data);
-        // load_like();
+        load_like();
     })
     .catch(function() {
         console.log('Error: Details error');
@@ -435,8 +434,9 @@ function load_like(){
             }
         }
     }else{
-        ajaxPromise(friendlyURL("?module=shop&op=load_likes"), 'GET', 'JSON', {token: localStorage.getItem('token')})
+        ajaxPromise(friendlyURL("?module=shop&op=load_likes"), 'POST', 'JSON', {token: localStorage.getItem('token')})
         .then(function(data) { 
+            // console.log(data);
             localStorage.removeItem('likes');
             for (row in data) {
                 if($("#" + data[row].id_car + ".list_heart").children("i").hasClass("bx-heart")){
@@ -454,7 +454,7 @@ function click_like(){
     $(document).on('click', '.list_heart', function() {
         if(localStorage.getItem('token') == null) {
             localStorage.setItem('product', this.getAttribute('id'));
-            window.location.href = 'index.php?module=login&op=login_view';
+            window.location.href = friendlyURL("?module=login&op=view");
             if($(this).children("i").hasClass("bx-heart")){
                 $(this).children("i").removeClass("bx-heart").addClass("bxs-heart");
                 like_storage(this.getAttribute('id'), like);
@@ -516,5 +516,5 @@ $(document).ready(function() {
     load_content_shop();
     localStorage.setItem('currentPage', 'shop-list');
     localStorage.setItem('filters', '');
-    // click_like();
+    click_like();
 });

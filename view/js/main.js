@@ -43,12 +43,12 @@ function load_menu() {
     // $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + friendlyURL("?module=errors&op=errors_log") + '" class="nav_link" data-tr="Errors log">Errors log</a>').appendTo('.nav_list');
     ajaxPromise(friendlyURL('?module=login&op=data_user'), 'POST', 'JSON', {token: localStorage.getItem('token')})
     .then(function(data) {
-        if (data.user_type === 'admin') {
+        if (data[0].user_type === 'admin') {
             menu_admin();
-        }else if (data.user_type === 'client') {
+        }else if (data[0].user_type === 'client') {
             menu_client();
         }
-        click_profile(data);
+        click_profile(data[0]);
     }).catch(function() {
         $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="' + friendlyURL("?module=login&op=view") + '" class="nav_link" data-tr="Log in">Log in</a>').appendTo('.nav_list');
         // $('<li></li>').attr({'class' : 'nav_item'}).html('<a href="index.php?module=errors&op=errors_log" class="nav_link" data-tr="Errors log">Errors log</a>').appendTo('.nav_list');
@@ -116,34 +116,7 @@ function logout() {
     });
 }
 
-// ------------------- LOAD CONTENT ------------------------ //
-
-function load_content() {
-    let path = window.location.pathname.split('/');
-    // console.log(path[5]);
-    if(path[5] === 'recover'){
-        console.log('hola recover');
-        // load_form_new_password(path[6]);
-    }else if (path[5] === 'verify') {
-        // console.log(path[6]);
-        ajaxPromise(friendlyURL("?module=login&op=verify_email"), 'POST', 'JSON', {token_email: path[6]})
-        .then(function(data) {
-            console.log(data);
-            window.location.href = friendlyURL("?module=home&op=view");
-        })
-        .catch(function() {
-          console.log('Error: verify email error');
-        });
-
-        /*
-        function verify_email(path[6]){
-            // $.ajax({url: friendlyURL('?page=login&op=verify_email')
-        */
-    }
-}
-
 $(document).ready(function() {
     load_menu();
     click_logout();
-    load_content();
 });

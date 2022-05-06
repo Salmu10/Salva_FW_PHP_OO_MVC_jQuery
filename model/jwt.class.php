@@ -14,15 +14,15 @@ class jwt {
     }
     
     public function encode($header, $payload, $key) {
-        $this -> data = $this -> base64url_encode($header) . '.' . $this -> base64url_encode($payload);
-        return $this -> data.'.'.$this -> JWS($header, $key);
+        $this->data = $this->base64url_encode($header) . '.' . $this->base64url_encode($payload);
+        return $this->data.'.'.$this->JWS($header, $key);
     }
     
     public function decode($token, $key) {
         list($header, $payload, $signature) = explode('.', $token);
-        $this -> data = $header . '.' . $payload;
-        if ($signature == $this -> JWS($this -> base64url_decode($header), $key)) {
-            return $this -> base64url_decode($payload);
+        $this->data = $header . '.' . $payload;
+        if ($signature == $this->JWS($this->base64url_decode($header), $key)) {
+            return $this->base64url_decode($payload);
         }
         exit('Invalid Signature');
     }
@@ -30,10 +30,10 @@ class jwt {
     private function setAlgorithm($algorithm) {
         switch ($algorithm[0]) {
             case 'n':
-                $this -> alg = 'plaintext';
+                $this->alg = 'plaintext';
                 break;
             case 'H':
-                $this -> alg = 'HMAC';
+                $this->alg = 'HMAC';
                 break;
             // By now, the only native is HMAC
             /* 
@@ -48,7 +48,7 @@ class jwt {
         }
         switch ($algorithm[2]) {
             case 'a':
-                $this -> alg = 'plaintext';
+                $this->alg = 'plaintext';
                 break;
             case 2:
                 $hash = 'sha256';
@@ -65,11 +65,11 @@ class jwt {
 
     private function JWS($header, $key) {
         $json = json_decode($header);
-        $this -> setAlgorithm($json -> alg);
-        if ($this -> alg == 'plaintext') {
+        $this->setAlgorithm($json->alg);
+        if ($this->alg == 'plaintext') {
             return '';
         }
-        return $this->base64url_encode(hash_hmac($this -> hash, $this -> data, $key, true));
+        return $this->base64url_encode(hash_hmac($this->hash, $this->data, $key, true));
     }
 }
 

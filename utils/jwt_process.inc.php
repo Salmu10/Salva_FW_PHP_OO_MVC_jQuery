@@ -9,7 +9,7 @@ class jwt_process {
         return $JWT -> encode($header, $payload, $secret);
     }
 
-    public static function decode($token) {
+    public static function decode_token($token) {
         $jwt = parse_ini_file(UTILS . "jwt.ini");
         $JWT = new jwt();
         return $JWT -> decode($token, $jwt['secret']);
