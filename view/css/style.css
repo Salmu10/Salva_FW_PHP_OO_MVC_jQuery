@@ -1411,6 +1411,70 @@ label.etiquetas {
     font-style: italic;
 }
 
+/* Contact */
+
+.contact_container {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.contact_page {
+    display: block;
+    width: 500px;
+    height: 600px;
+    margin: auto;
+    text-align: center;
+    border-style: solid;
+    border-width: 3px;
+    border-color: #333;
+}
+
+.name_contact, .email_contact, .contact_matter, .contact_message {
+    display: block;
+    margin-top: 20px;
+    font-family: 'Verdana', sans-serif;
+    color: #333;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+#contact_name, #contact_email {
+    text-align: center;
+    width: 200px;
+}
+
+#send_contact {
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    line-height: normal;
+    font-size: 14px;
+    text-align: center;
+    font-family: 'Verdana', sans-serif;
+    font-weight: 600;
+    padding: 0.4em 0em 0.4em 0em;
+    width: 90px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: solid 2px #333;
+    color: #333;
+    background-color: #fff;
+}
+
+#send_contact:hover {
+    background: rgb(192, 192, 192);
+}
+
+#error_contact_name, #error_contact_email, #error_matter, #error_message { 
+    display: block;
+    margin: auto;
+    color: red;
+    font-family: arial;
+    font-size: 15px;
+    font-style: italic;
+}
+
 /* Profile */
 
 .profile_options {

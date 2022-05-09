@@ -34,6 +34,17 @@ function friendlyURL(url) {
     return "http://localhost/Ejercicios/Framework_PHP_OO_MVC" + link;
 }
 
+/* Loading Spinner */
+
+function loading_spinner() {
+    window.onload = function(){
+        var contenedor = document.getElementById('contenedor_carga');
+
+        contenedor.style.visibility = "hidden";
+        contenedor.style.opacity = '0';
+    }
+}
+
 /* LOAD MENU */
 
 function load_menu() {
@@ -119,4 +130,5 @@ function logout() {
 $(document).ready(function() {
     load_menu();
     click_logout();
+    loading_spinner();
 });
