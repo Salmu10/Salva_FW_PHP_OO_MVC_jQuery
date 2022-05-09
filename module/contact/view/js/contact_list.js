@@ -6,11 +6,11 @@ function check_email() {
 		var error = false;
 	
 		if(document.getElementById('contact_name').value.length === 0){
-			document.getElementById('error_contact_name').innerHTML = "You have to write an username";
+			document.getElementById('error_contact_name').innerHTML = "You have to write an username.";
 			error = true;
 		}else{
 			if(!pcontact_name.test(document.getElementById('contact_name').value)){
-				document.getElementById('error_contact_name').innerHTML = "The name must be longer than 3 characters"; 
+				document.getElementById('error_contact_name').innerHTML = "The name must be longer than 3 characters."; 
 				error = true;
 			}else{
 				document.getElementById('error_contact_name').innerHTML = "";
@@ -18,11 +18,11 @@ function check_email() {
 		}
 	
 		if(document.getElementById('contact_email').value.length === 0){
-			document.getElementById('error_contact_email').innerHTML = "You have to write an email";
+			document.getElementById('error_contact_email').innerHTML = "You have to write an email.";
 			error = true;
 		}else{
 			if(!pmail.test(document.getElementById('contact_email').value)){
-				document.getElementById('error_contact_email').innerHTML = "The email format is invalid"; 
+				document.getElementById('error_contact_email').innerHTML = "The email format is invalid."; 
 				error = true;
 			}else{
 				document.getElementById('error_contact_email').innerHTML = "";
@@ -30,18 +30,18 @@ function check_email() {
 		}
 
 		if (document.getElementById('matter').value === "Seleccione un asunto" ) {
-			document.getElementById('error_matter').innerHTML = "Please, select a matter";
+			document.getElementById('error_matter').innerHTML = "Please, select a matter.";
 			error = true;
 		}else{
 			document.getElementById('error_matter').innerHTML = "";
 		}
 	
 		if(document.getElementById('message').value.length === 0){
-			document.getElementById('error_message').innerHTML = "You have to write a message";
+			document.getElementById('error_message').innerHTML = "You have to write a message.";
 			error = true;
 		}else{
 			if(!pmessage.test(document.getElementById('message').value)){
-				document.getElementById('error_message').innerHTML = "The message must be longer than 20 characters"; 
+				document.getElementById('error_message').innerHTML = "The message must be longer than 20 characters."; 
 				error = true;
 			}else{
 				document.getElementById('error_message').innerHTML = "";
