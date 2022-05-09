@@ -498,7 +498,5 @@ function load_content_shop(){
 
 $(document).ready(function() {
     load_content_shop();
-    localStorage.setItem('currentPage', 'shop-list');
-    localStorage.setItem('filters', '');
     click_like();
 });
