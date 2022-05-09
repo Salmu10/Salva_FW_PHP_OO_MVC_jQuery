@@ -74,11 +74,10 @@ function login(){
                 toastr.options.timeOut = 3000;
                 toastr.success("Inicio de sesión realizado");
                 if(localStorage.getItem('likes') == null) {
-                    console.log('Hola');
-                    window.location.href = friendlyURL("?module=home&op=view");
+                    setTimeout('window.location.href = friendlyURL("?module=home&op=view")', 1000);
                 } else {
                     console.log(localStorage.getItem('product'));
-                    window.location.href = friendlyURL("?module=shop&op=view");
+                    setTimeout('window.location.href = friendlyURL("?module=shop&op=view")', 1000);
                 }
             }	
         }).fail(function() {
@@ -107,10 +106,10 @@ function social_login(param){
                 toastr.options.timeOut = 3000;
                 toastr.success("Inicio de sesión realizado");
                 if(localStorage.getItem('likes') == null) {
-                    window.location.href = friendlyURL("?module=home&op=view");
+                    setTimeout('window.location.href = friendlyURL("?module=home&op=view")', 1000);
                 } else {
                     console.log(localStorage.getItem('product'));
-                    window.location.href = friendlyURL("?module=shop&op=view");
+                    setTimeout('window.location.href = friendlyURL("?module=shop&op=view")', 1000);
                 }
             })
             .catch(function() {
@@ -244,7 +243,7 @@ function register(){
             }else{
                 toastr.options.timeOut = 2000;
                 toastr.success("Email sended");
-                setTimeout(1000, window.location.href = friendlyURL("?module=login&op=view"));
+                setTimeout('window.location.href = friendlyURL("?module=login&op=view")', 1000);
             }	
         }).fail(function() {
             console.log('Error: Register error');
@@ -311,7 +310,7 @@ function send_recover_password(){
             } else{
                 toastr.options.timeOut = 3000;
                 toastr.success("Email sended");
-                setTimeout(1000, window.location.href = friendlyURL("?module=login&op=view"));
+                setTimeout('window.location.href = friendlyURL("?module=login&op=view")', 1000);
             }
         }).fail(function( textStatus ) {
             console.log('Error: Recover password error');
@@ -394,7 +393,7 @@ function send_new_password(token_email){
             if(data == "done"){
                 toastr.options.timeOut = 3000;
                 toastr.success('New password changed');
-                setTimeout(1000, window.location.href = friendlyURL("?module=login&op=view"));
+                setTimeout('window.location.href = friendlyURL("?module=login&op=view")', 1000);
             } else {
                 toastr.options.timeOut = 3000;
                 toastr.error('Error seting new password');
