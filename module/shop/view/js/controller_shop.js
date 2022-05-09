@@ -1,6 +1,5 @@
 function filters() {
 
-    // var brand_name = [];
     var type_name = [];
     var category_name = [];
     var color = [];
@@ -9,13 +8,6 @@ function filters() {
     var filters = [];
     
     localStorage.removeItem('filters');
-
-    // $.each($("input[id='brand_name']:checked"), function(){            
-    //     brand_name.push($(this).val());
-    // });
-    // if(brand_name.length != 0){
-    //     filters.push({"brand_name":brand_name});
-    // }
 
     $.each($("input[id='type_name']:checked"), function(){            
         type_name.push($(this).val());
@@ -93,7 +85,6 @@ function load_filters() {
     })
     .catch(function() {
         console.log('Error: Filters error');
-        // window.location.href = 'index.php?module=errors&op=503&desc=Filters error';
     });
 }
 
@@ -128,7 +119,6 @@ function visit(){
     })
     .fail(function( ) {
         console.log('Error: Most visit error');
-        // window.location.href = 'index.php?module=errors&op=503&desc=Most visit error';
     }); 
 }
 
@@ -221,7 +211,6 @@ function load_list_cars(total_prod = 0, items_page = 5) {
     })
     .catch(function() {
         console.log('Error: List cars error');
-        // window.location.href = 'index.php?module=errors&op=503&desc=List cars error';
     });  
 }
 
@@ -304,7 +293,6 @@ function load_details() {
     })
     .catch(function() {
         console.log('Error: Details error');
-        // window.location.href = 'index.php?module=errors&op=503&desc=Details error';
     });
 }
 
@@ -362,7 +350,6 @@ function cars(car_data, loadeds = 0) {
         }
     }).catch(function() {
         console.log('Error: Number of cars error');
-        // window.location.href = 'index.php?module=errors&op=503&desc=Number of cars error';
     }); 
 }
 
@@ -414,7 +401,6 @@ function load_pagination(){
         });
     }).catch(function() {
         console.log('Error: Pagination error');
-        // window.location.href = 'index.php?module=errors&op=503&desc=Pagination error';
     }); 
 }
 
@@ -445,7 +431,6 @@ function load_like(){
             }
         }).catch(function() {
             console.log('Error: Load like error');
-            // window.location.href = 'index.php?module=errors&op=503&desc=Load like error';
         });   
     }
 }
@@ -468,7 +453,6 @@ function click_like(){
                 console.log(data);
             }).catch(function() {
                 console.log('Error: Click like error');
-                // window.location.href = 'index.php?module=errors&op=503&desc=Click like error';
             });  
 
             if($(this).children("i").hasClass("bx-heart")){

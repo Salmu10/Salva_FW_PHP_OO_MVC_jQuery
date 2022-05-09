@@ -81,7 +81,7 @@ function send_email(content_email) {
 		console.log(data);
 		toastr.success('Email sended');
 	}).catch(function(data) {
-		toastr.error('Something happend when trying to send.' ,'Error');
+		console.log('Error: send contact us error');
 	});
 }
 

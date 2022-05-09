@@ -59,7 +59,6 @@ function carrusel(){
     })
     .fail(function() {
       console.log('Error: Carousel error');
-      // window.location.href = 'index.php?module=errors&op=503&desc=Carousel error';
     }); 
 }
 
@@ -82,7 +81,6 @@ function category() {
   })
   .catch(function() {
     console.log('Error: Categories error');
-    // window.location.href = 'index.php?module=errors&op=503&desc=Categories error';
   });    
 }
 
@@ -107,7 +105,6 @@ function types() {
     })
     .catch(function() {
       console.log('Error: Types error');
-      // window.location.href = 'index.php?module=errors&op=503&desc=Types error';
     });
 }
 
@@ -172,9 +169,6 @@ function load_suggestions() {
       }
       if (limit === 9) {
         $('.load_more_button').remove();
-        // $("#no_more").append(
-        //     '<h3>NO HAY MAS LIBROS</h3>'
-        // );
       }
     });
   })

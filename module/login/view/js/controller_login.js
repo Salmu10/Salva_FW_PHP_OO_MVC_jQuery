@@ -22,11 +22,9 @@ function click_login(){
 
     $('#google').on('click', function(e) {
         social_login('google');
-        // console.log('google');
     }); 
 
     $('#github').on('click', function(e) {
-        // console.log('github');
         social_login('github');
     }); 
 }
@@ -85,7 +83,6 @@ function login(){
             }	
         }).fail(function() {
             console.log('Error: Login error');
-            // window.location.href = 'index.php?module=errors&op=503&desc=Login error';
         });     
     }
 }
@@ -110,21 +107,18 @@ function social_login(param){
                 toastr.options.timeOut = 3000;
                 toastr.success("Inicio de sesión realizado");
                 if(localStorage.getItem('likes') == null) {
-                    console.log('hola');
-                    setTimeout(1000, window.location.href = friendlyURL("?module=home&op=view"));
+                    window.location.href = friendlyURL("?module=home&op=view");
                 } else {
                     console.log(localStorage.getItem('product'));
-                    setTimeout(1000, window.location.href = friendlyURL("?module=shop&op=view"));
-                };
+                    window.location.href = friendlyURL("?module=shop&op=view");
+                }
             })
             .catch(function() {
                 console.log('Error: Social login error');
-                // window.location.href = 'index.php?module=errors&op=503&desc=Types error';
             });
         }
     })
     .catch(function(error) {
-        // console.log('Error: Social login error');
         var errorCode = error.code;
         console.log(errorCode);
         var errorMessage = error.message;
@@ -250,12 +244,10 @@ function register(){
             }else{
                 toastr.options.timeOut = 2000;
                 toastr.success("Email sended");
-                // window.location.href = friendlyURL("?module=login&op=view");
                 setTimeout(1000, window.location.href = friendlyURL("?module=login&op=view"));
             }	
         }).fail(function() {
             console.log('Error: Register error');
-            // window.location.href = 'index.php?module=errors&op=503&desc=Register error';
         }); 
     }
 }
@@ -424,7 +416,6 @@ function load_content() {
     }else if (path[5] === 'verify') {
         ajaxPromise(friendlyURL("?module=login&op=verify_email"), 'POST', 'JSON', {token_email: path[6]})
         .then(function(data) {
-            // console.log(data);
             window.location.href = friendlyURL("?module=home&op=view");
         })
         .catch(function() {
