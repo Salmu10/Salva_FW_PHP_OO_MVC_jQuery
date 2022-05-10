@@ -7,19 +7,18 @@
 		
 		function send_contact_us(){
 
-			echo json_encode('Done!');
-
-			// $message = ['type' => 'contact',
-			// 			'inputName' => $_POST['name'], 
-			// 			'fromEmail' => $_POST['email'], 
-			// 			'inputMatter' => $_POST['matter'], 
-			// 			'inputMessage' => $_POST['message']];
-			// $email = json_decode(mail::send_email($message), true);
-			// if (!empty($email)) {
-			// 	echo json_encode('Done!');
-			// 	return;  
-			// } 
-			// echo json_encode('Error!');
+			$message = ['type' => 'contact',
+						'inputName' => $_POST['name'], 
+						'fromEmail' => $_POST['email'], 
+						'inputMatter' => $_POST['matter'], 
+						'inputMessage' => $_POST['message']];
+			$email = json_decode(mail::send_email($message), true);
+			if (!empty($email)) {
+				echo json_encode('Done!');
+				return;  
+			} else {
+			echo json_encode('Error!');
+			}
 		}
 	}
 ?>
