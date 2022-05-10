@@ -6,7 +6,7 @@ use cars;
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-04-2022 a las 16:35:13
+-- Tiempo de generación: 10-05-2022 a las 14:43:45
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.0.13
 
@@ -209,7 +209,12 @@ INSERT INTO `errors` (`id_errors`, `type`, `date`) VALUES
 (1549, 'Load like error', '2022-04-05'),
 (1550, 'Load like error', '2022-04-05'),
 (1551, 'Load like error', '2022-04-08'),
-(1552, 'Load like error', '2022-04-08');
+(1552, 'Load like error', '2022-04-08'),
+(1553, 'Login error', '2022-04-26'),
+(1554, 'Login error', '2022-04-26'),
+(1555, 'Login error', '2022-05-03'),
+(1556, 'Login error', '2022-05-04'),
+(1557, 'Login error', '2022-05-06');
 
 -- --------------------------------------------------------
 
@@ -235,7 +240,12 @@ INSERT INTO `likes` (`cod_like`, `username`, `id_car`) VALUES
 (5, 'salmu10', 77),
 (6, 'salmu10', 2),
 (10, 'salmu10', 12),
-(12, 'salmu10', 7);
+(12, 'salmu10', 7),
+(17, 'salmu', 5),
+(22, 'salmu', 9),
+(23, 'salmu', 1),
+(24, 'ubedasalmu', 4),
+(25, 'ubedasalmu', 6);
 
 -- --------------------------------------------------------
 
@@ -266,23 +276,25 @@ INSERT INTO `type` (`cod_type`, `type_name`, `type_img`) VALUES
 --
 
 CREATE TABLE `users` (
+  `id` varchar(250) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(1000) NOT NULL,
   `email` varchar(50) NOT NULL,
   `user_type` varchar(20) NOT NULL,
   `avatar` varchar(1000) NOT NULL,
-  `user_token` varchar(500) NOT NULL
+  `token_email` varchar(250) NOT NULL,
+  `activate` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`username`, `password`, `email`, `user_type`, `avatar`, `user_token`) VALUES
-('salmu10', '$2y$12$VADGgdQvyQV.k.y2V3RDKeJaHd9tbFpPJPZuwkwL0Ibi04KRPXGSO', 'ubedasalva@gmail.com', 'client', 'https://robohash.org/41ddff03499ee0029d7975e84a5a45e4', ''),
-('salmu50', '$2y$12$xSWqPPnLSY8M8RzswT.fwevQJB9.Ds5.mznMrufmoBLGFdE0f/0a6', '13salmu@gmail.com', 'client', 'https://robohash.org/ce0c1d009305d04c1dae2a091b11a357', ''),
-('salva10', '$2y$12$F6.RX0565HaG1S1PmCKyIer/JLMZVRUpxPuGhsnx0PmnYE4DDgx.q', 'ubedasalmu@gmail.com', 'client', 'https://robohash.org/9eb12698dc1322f49406603ec8c94295', ''),
-('Salvamu20', '$2y$12$mWgmPupUYlFe6ryg0wpRi.mAAzbY75RV0o7mT1TAewdGGAIUwcl7e', 'salvamu1997@gmail.com', 'client', 'https://robohash.org/fd81d6bb05066996aa94e3938fdf14d4', '');
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `user_type`, `avatar`, `token_email`, `activate`) VALUES
+('256142', 'salmu', '$2y$12$Q3fPhRuzsa3SsIzlHBqg6e2YTV91LQfLC2zahMDc6/QuB2/GT3Vm.', 'sqas@gmail.com', 'client', 'https://robohash.org/4d6c7b594132a737a7eaa31810c2f1a4', '', 1),
+('32c450', 'salmu70', '$2y$10$x2rjeCY8A4OomqhpIx987uJ3k0RKG3URQnMB7qo2mg354jheVs6OO', 'wefwes@gmail.com', 'client', 'https://robohash.org/17f4401e301b5ce07f5a514c2cdce6fe', '7bea93a22795eba84f35', 0),
+('b4ac02', 'salmu60', '$2y$12$Q3fPhRuzsa3SsIzlHBqg6e2YTV91LQfLC2zahMDc6/QuB2/GT3Vm.', 'edwerwer@gmail.com', 'client', 'https://robohash.org/d70cc9c7102c6167470c0b400623c631', '', 1),
+('voNu1FaH0HOAljo5qpz5B3oisTz1', 'ubedasalmu', '$2y$12$Q3fPhRuzsa3SsIzlHBqg6e2YTV91LQfLC2zahMDc6/QuB2/GT3Vm.', 'ubedasalmu@gmail.com', 'client', 'https://lh3.googleusercontent.com/a-/AOh14Ghd_-Zk2kohzswGIFstxDP2zsp1Jm7tKaLO7Q3Q=s96-c', '', 1);
 
 --
 -- Índices para tablas volcadas
@@ -342,8 +354,7 @@ ALTER TABLE `type`
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`username`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -359,13 +370,13 @@ ALTER TABLE `car_images`
 -- AUTO_INCREMENT de la tabla `errors`
 --
 ALTER TABLE `errors`
-  MODIFY `id_errors` int(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1553;
+  MODIFY `id_errors` int(100) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1558;
 
 --
 -- AUTO_INCREMENT de la tabla `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `cod_like` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `cod_like` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Restricciones para tablas volcadas
