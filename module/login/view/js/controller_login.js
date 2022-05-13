@@ -415,7 +415,9 @@ function load_content() {
     }else if (path[5] === 'verify') {
         ajaxPromise(friendlyURL("?module=login&op=verify_email"), 'POST', 'JSON', {token_email: path[6]})
         .then(function(data) {
-            window.location.href = friendlyURL("?module=home&op=view");
+            toastr.options.timeOut = 3000;
+            toastr.success('Email verified');
+            setTimeout('window.location.href = friendlyURL("?module=home&op=view")', 1000);
         })
         .catch(function() {
           console.log('Error: verify email error');
