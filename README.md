@@ -82,7 +82,7 @@ producto si el usuario se encuentra logeado.</p>
 
 <ul>
   <li><a href="https://github.com/botmonster/jquery-bootpag">Bootpag</a></li>
-  <li><a href="[https://developer.mozilla.org/es/docs/Web/JavaScript](https://kenwheeler.github.io/slick/)">Slick</a></li>
+  <li><a href="https://kenwheeler.github.io/slick/">Slick</a></li>
   <li><a href="https://jquery.com/">JQuery</a>: Version </li>
   <li><a href="https://www.mysql.com/">Mysql</a>: Version 8.0.13</li>
 </ul>
