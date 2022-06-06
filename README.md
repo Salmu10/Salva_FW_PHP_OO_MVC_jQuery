@@ -71,7 +71,7 @@ producto si el usuario se encuentra logeado.</p>
   <li><a href="https://www.php.net/manual/es/intro-whatis.php">PHP:</a> Version 8.0.13</li>
   <li><a href="https://developer.mozilla.org/es/docs/Web/JavaScript">JavaScript</a></li>
   <li><a href="https://jquery.com/">JQuery</a></li>
-  <li><a href="https://www.mysql.com/">Mysql</a></li>
+  <li><a href="https://www.phpmyadmin.net/">PhpMyAdmin</a></li>
 </ul>
 
 <hr>
