@@ -47,4 +47,44 @@ usuario no la recuerde. Consta además, de un social login mediante una cuenta d
  
 <h3>Shop</h3>
 <p>Este es el módulo más importante de toda la web, en el se puede ver la lista de productos del que dispone la<br>
-web y además se puede filtrar esta lista.</p>
+web y además se puede filtrar esta lista. La lista se encuentra paginada y además los productos se encuentran<br>
+geolocalizados por google maps. Cada producto, tienen también, una vista detallada de ellos, con su respectiva<br>
+localización y una sección de productos relacionados. También hay una opción de marcado de favoritos de cada<br>
+producto si el usuario se encuentra logeado.</p>
+<ul>
+  <li>Lista de productos</li>
+  <li>Filtros</li>
+  <li>Localización del producto</li>
+  <li>Detalles del producto</li>
+  <li>Likes</li>
+  <li>Más relacionados</li>
+  <li>Paginación</li>
+</ul>
+
+<hr>
+
+<h2>TECNOLOGÍAS EMPLEADAS</h2>
+
+<p>Lista de tecnologías utilizadas en este proyecto:</p>
+
+<ul>
+  <li><a href="https://www.php.net/manual/es/intro-whatis.php">PHP</a>: Version 8.0.13</li>
+  <li><a href="https://developer.mozilla.org/es/docs/Web/JavaScript">JavaScript</a>: Version </li>
+  <li><a href="https://jquery.com/">JQuery</a>: Version </li>
+  <li><a href="https://www.mysql.com/">Mysql</a>: Version 8.0.13</li>
+</ul>
+
+<hr>
+
+<h2>LIBRERIAS</h2>
+
+<p>Lista de librerías utilizadas en este proyecto:</p>
+
+<ul>
+  <li><a href="https://github.com/botmonster/jquery-bootpag">Bootpag</a></li>
+  <li><a href="[https://developer.mozilla.org/es/docs/Web/JavaScript](https://kenwheeler.github.io/slick/)">Slick</a></li>
+  <li><a href="https://jquery.com/">JQuery</a>: Version </li>
+  <li><a href="https://www.mysql.com/">Mysql</a>: Version 8.0.13</li>
+</ul>
+ 
+
