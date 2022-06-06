@@ -82,12 +82,14 @@ producto si el usuario se encuentra logeado.</p>
 <p>Lista de librerías utilizadas en este proyecto:</p>
 
 <ul>
-  <li><a href="https://codeseven.github.io/toastr/">Toastr</a></li>
-  <li><a href="https://github.com/botmonster/jquery-bootpag">Bootpag</a></li>
-  <li><a href="https://nickpiscitelli.github.io/Glider.js/">Glider.js</a></li>
-  <li><a href="https://kenwheeler.github.io/slick/">Slick</a></li>
-  <li><a href="https://www.mapbox.com/">Mapbox</a></li>
-  <li><a href="https://boxicons.com/">Boxicons</a></li>
+    <li><a href="https://codeseven.github.io/toastr/">Toastr</a></li>
+    <li><a href="https://github.com/botmonster/jquery-bootpag">Bootpag</a></li>
+    <li><a href="https://nickpiscitelli.github.io/Glider.js/">Glider.js</a></li>
+    <li><a href="https://kenwheeler.github.io/slick/">Slick</a></li>
+    <li><a href="https://www.mapbox.com/">Mapbox</a></li>
+    <li><a href="https://www.mailgun.com/es/">Mailgun</a></li>
+    <li><a href="https://boxicons.com/">Boxicons</a></li>
+    <li><a href="https://firebase.google.com/?gclid=CjwKCAjwy_aUBhACEiwA2IHHQJQy7xT1XD6BOGJLrfTesNafAdHO8Z48rGYe4ggyZP-fP4kD4JVZLBoC51wQAvD_BwE&gclsrc=aw.ds">Firebase</a></li>
 </ul>
  
 
