@@ -68,7 +68,7 @@ producto si el usuario se encuentra logeado.</p>
 <p>Lista de tecnologías utilizadas en este proyecto:</p>
 
 <ul>
-  <li><a href="https://www.php.net/manual/es/intro-whatis.php">PHP</a>: Version 8.0.13</li>
+  <li><a href="https://www.php.net/manual/es/intro-whatis.php">PHP:</a> Version 8.0.13</li>
   <li><a href="https://developer.mozilla.org/es/docs/Web/JavaScript">JavaScript</a></li>
   <li><a href="https://jquery.com/">JQuery</a></li>
   <li><a href="https://www.mysql.com/">Mysql</a></li>
@@ -76,7 +76,7 @@ producto si el usuario se encuentra logeado.</p>
 
 <hr>
 
-<h2>LIBRERIAS</h2>
+<h2>LIBRERÍAS</h2>
 
 <p>Lista de librerías utilizadas en este proyecto:</p>
 
