@@ -69,9 +69,9 @@ producto si el usuario se encuentra logeado.</p>
 
 <ul>
   <li><a href="https://www.php.net/manual/es/intro-whatis.php">PHP</a>: Version 8.0.13</li>
-  <li><a href="https://developer.mozilla.org/es/docs/Web/JavaScript">JavaScript</a>: Version </li>
-  <li><a href="https://jquery.com/">JQuery</a>: Version </li>
-  <li><a href="https://www.mysql.com/">Mysql</a>: Version 8.0.13</li>
+  <li><a href="https://developer.mozilla.org/es/docs/Web/JavaScript">JavaScript</a></li>
+  <li><a href="https://jquery.com/">JQuery</a></li>
+  <li><a href="https://www.mysql.com/">Mysql</a></li>
 </ul>
 
 <hr>
@@ -81,10 +81,12 @@ producto si el usuario se encuentra logeado.</p>
 <p>Lista de librerías utilizadas en este proyecto:</p>
 
 <ul>
+  <li><a href="https://codeseven.github.io/toastr/">Toastr</a></li>
   <li><a href="https://github.com/botmonster/jquery-bootpag">Bootpag</a></li>
+  <li><a href="https://nickpiscitelli.github.io/Glider.js/">Glider.js</a></li>
   <li><a href="https://kenwheeler.github.io/slick/">Slick</a></li>
-  <li><a href="https://jquery.com/">JQuery</a>: Version </li>
-  <li><a href="https://www.mysql.com/">Mysql</a>: Version 8.0.13</li>
+  <li><a href="https://www.mapbox.com/">Mapbox</a></li>
+  <li><a href="https://boxicons.com/">Boxicons</a></li>
 </ul>
  
 
