@@ -44,6 +44,7 @@ usuario no la recuerde. Consta además, de un social login mediante una cuenta d
   <li>Social login</li>
   <li>Recover password</li>
 </ul>
+<p>Además el login tiene un token mediante JWT en el que va verificando durante el uso de la web si el usuario<br>conectado realmente es él.</p>
  
 <h3>Shop</h3>
 <p>Este es el módulo más importante de toda la web, en el se puede ver la lista de productos del que dispone la<br>
